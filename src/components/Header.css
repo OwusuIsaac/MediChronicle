@@ -1,0 +1,19 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #34c3ff; /* Example color */
+  padding: 1rem;
+  color: white;
+}
+
+.app-title {
+  margin: 0;
+}
+
+.user-name {
+  background-color: white;
+  color: #34c3ff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}

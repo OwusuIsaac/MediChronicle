@@ -1,0 +1,30 @@
+.insurance-page {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.plan-details,
+.insurance-documents,
+.claims-history {
+  margin-bottom: 30px;
+}
+
+.document-link {
+  display: inline-block;
+  margin-right: 15px;
+  background-color: #e7f1ff;
+  color: #0056b3;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}

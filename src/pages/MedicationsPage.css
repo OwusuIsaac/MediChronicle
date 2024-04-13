@@ -1,0 +1,20 @@
+.medications-page {
+    padding-top: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+  
+
+h1 {
+    text-align: center;
+    padding-bottom: 10px;
+}
+h2 {
+    font-size: 1.4em;
+}
+
+hr.solid {
+    margin-top: 10vh;
+    margin-bottom: 8vh;
+    border-top: 3px solid #bbb;
+}

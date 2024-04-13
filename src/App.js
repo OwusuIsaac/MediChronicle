@@ -6,6 +6,9 @@ import Sidebar from "./components/Sidebar";
 // import Account from "./pages/Account";
 import DoctorsPage from "./pages/DoctorsPage";
 import InsurancePage from "./pages/InsurancePage";
+import ImmunizationsPage from "./pages/ImmunizationsPage";
+import MedicationsPage from "./pages/MedicationsPage";
+import ConsultationsPage from "./pages/ConsultationsPage";
 import HomePage from "./pages/HomePage";
 import "./App.css";
 
@@ -73,6 +76,9 @@ function App() {
               <Route path="/" element={<HomePage {...mockData} />} />
               <Route path="/doctors" element={<DoctorsPage />} />
               <Route path="/insurance" element={<InsurancePage />} />
+              <Route path="/immunizations" element={<ImmunizationsPage />} />
+              <Route path="/medications" element={<MedicationsPage />} />
+              <Route path="/consultations" element={<ConsultationsPage />} />
               {/* ... other routes */}
             </Routes>
           </main>

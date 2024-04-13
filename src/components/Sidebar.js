@@ -21,6 +21,21 @@ const Sidebar = () => {
             Insurance
           </NavLink>
         </li>
+        <li className="nav-item">
+          <NavLink to="/immunizations" activeClassName="active">
+            Immunizations
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to="/medications" activeClassName="active">
+            Medications
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to="/consultations" activeClassName="active">
+            Consultations
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

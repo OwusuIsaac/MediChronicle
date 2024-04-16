@@ -1,0 +1,52 @@
+/* ConsultationForm.css */
+form {
+    max-width: 9000px; /* Or whatever maximum width you prefer */
+    margin: 20px auto; /* This centers the form with a margin from the top */
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  form label {
+    display: flex;
+    flex-direction: column; /* Stacks the input under the label */
+    margin-bottom: 10px;
+  }
+  
+  form label span {
+    font-weight: bold; /* Optionally style label text */
+  }
+  
+  form input[type="text"],
+  form input[type="date"],
+  form input[type="time"],
+  form input[type="file"],
+  form textarea,
+  form select {
+    padding: 8px;
+    margin-top: 5px; /* Space between label and input field */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  form textarea {
+    height: 100px; /* Or any other height */
+    resize: vertical;
+  }
+  
+  form button {
+    padding: 10px 15px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  form button:hover {
+    background-color: #4cae4c;
+  }
+  

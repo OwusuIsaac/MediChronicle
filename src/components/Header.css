@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #34c3ff; /* Example color */
+  /* background-color: #34c3ff; */
+  background-color: #005a87;
   padding: 1rem;
   color: white;
 }
@@ -13,7 +14,8 @@
 
 .user-name {
   background-color: white;
-  color: #34c3ff;
+  /* color: #34c3ff; */
+  color: #005a87;
   padding: 0.5rem 1rem;
   border-radius: 20px;
 }

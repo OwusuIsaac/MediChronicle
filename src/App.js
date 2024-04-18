@@ -7,6 +7,14 @@ import Sidebar from "./components/Sidebar";
 import DoctorsPage from "./pages/DoctorsPage";
 import InsurancePage from "./pages/InsurancePage";
 import HomePage from "./pages/HomePage";
+import ConsultationsPage from "./pages/ConsultationsPage";
+import ImmunizationsPage from "./pages/ImmunizationsPage";
+import MedicationsPage from "./pages/MedicationsPage";
+import AccountSettings from "./pages/AccountSettings"; // Import AccountSettings component
+import Radiology from "./pages/Radiology"; // Import AccountSettings component
+import Doctorhomepage from "./pages/Doctorhomepage";
+import InputMedical from "./pages/InputMedical";
+
 import "./App.css";
 
 function App() {
@@ -73,6 +81,13 @@ function App() {
               <Route path="/" element={<HomePage {...mockData} />} />
               <Route path="/doctors" element={<DoctorsPage />} />
               <Route path="/insurance" element={<InsurancePage />} />
+              <Route path="/immunizations" element={<ImmunizationsPage />} />
+              <Route path="/medications" element={<MedicationsPage />} />
+              <Route path="/consultations" element={<ConsultationsPage />} />
+              <Route path="/account-settings" element={<AccountSettings />} />
+              <Route path="/radiology" element={<Radiology />} />{" "}
+              <Route path="/Doctorhomepage" element={<Doctorhomepage />} />{" "}
+              <Route path="/InputMedical" element={<InputMedical />} />{" "}
               {/* ... other routes */}
             </Routes>
           </main>

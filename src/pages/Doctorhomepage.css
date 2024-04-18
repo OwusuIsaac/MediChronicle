@@ -1,0 +1,27 @@
+.home-page {
+  padding: 20px;
+}
+
+.welcome-section {
+  background: #f5f5f5;
+  padding: 20px;
+  margin-bottom: 80px;
+  text-align: center;
+}
+
+.home-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Adjust as needed for layout */
+  grid-gap: 20px;
+}
+/* Style sections similarly */
+
+.RelatedDoctors,
+.Consultations,
+.Chatwithdoctors,
+.MyPatients {
+  background: white;
+  padding: 200px;
+  border-radius: 80px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

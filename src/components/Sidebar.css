@@ -21,7 +21,9 @@
 }
 
 .nav-item a.active {
-  color: #34c3ff;
-  border-left: 4px solid #34c3ff;
+  /* color: #34c3ff; */
+  color: #005a87;
+  /* border-left: 4px solid #34c3ff; */
+  border-left: 4px solid #005a87;
   padding-left: 1rem;
 }

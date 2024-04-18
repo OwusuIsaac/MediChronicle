@@ -1,0 +1,30 @@
+/* #medtable-area{
+    margin-left: 3vw;
+} */
+
+#table-title {
+  height: 16vh;
+  /* padding-left: 20px; */
+  line-height: 16vh;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+td,
+th {
+  border: 1px solid black;
+  height: 6vh;
+  text-align: center;
+}
+/* tr:nth-child(even) {
+    background-color: white;
+}
+
+#table-headers{
+    background-color: rgb(114,161,205);
+    height: 10vh;
+} */

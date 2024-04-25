@@ -1,4 +1,5 @@
 import React from "react";
+import { useUserContext } from "../contexts/UserContext"; // Adjust the import path as necessary
 import "./Doctorhomepage.css"; // Ensure this path matches your CSS file's location
 
 const Card = ({ title, children }) => (
@@ -8,16 +9,14 @@ const Card = ({ title, children }) => (
   </div>
 );
 
-const DoctorhomePage = ({
-  userName,
-  myPatients,
-  consultations,
-  chatWithDoctor,
-}) => {
+const DoctorhomePage = ({ myPatients, consultations, chatWithDoctor }) => {
+  const { user } = useUserContext(); // Access user context
+  const userName = user ? user.userName : "Guest"; // Handle the case where no user is logged in
+
   return (
     <div className="doctor-home-page">
       <section className="welcome-section">
-        <h2>Welcome, Dr. {userName}</h2>
+        <h2>Welcome, Dr.{userName}</h2> {/* Display the user's name */}
       </section>
       <div className="home-content">
         {/* My Patients Section */}

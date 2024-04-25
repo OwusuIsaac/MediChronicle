@@ -1,55 +1,167 @@
 import React, { useState } from "react";
-import "./InputMedical.css";
-const ConsultationForm = ({ onAddConsultation }) => {
-  const [consultationDetails, setConsultationDetails] = useState({
+import "./InputMedical.css"; // Ensure CSS file is correctly linked
+
+const MedicalEntryForm = ({ onAddMedicalEntry }) => {
+  const [entryDetails, setEntryDetails] = useState({
     patientName: "",
-    diagnosis: "",
-    advices: "",
-    prescription: "",
+    patientId: "",
     date: "",
-    time: "",
+    symptoms: "",
+    diagnosis: "",
+    prescription: [{ medication: "", dosage: "" }],
+    nonPharmacologicalTreatments: "",
     doctorName: "",
+    doctorSpecialization: "",
     doctorContact: "",
-    doctorAddress: "",
-    attachment: null,
+    followUpInstructions: "",
+    hospitalName: "",
+    attachments: [],
   });
+
+  // Add a key state for the file input
+  const [fileInputKey, setFileInputKey] = useState(Date.now());
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (files) {
-      setConsultationDetails((prev) => ({ ...prev, [name]: files[0] }));
+    if (name.startsWith("medication") || name.startsWith("dosage")) {
+      // Handle prescription medications and dosages
+      const index = parseInt(name.split("-")[1]);
+      const key = name.split("-")[0];
+      const updatedPrescription = [...entryDetails.prescription];
+      updatedPrescription[index][key] = value;
+      setEntryDetails((prev) => ({
+        ...prev,
+        prescription: updatedPrescription,
+      }));
+    } else if (files) {
+      setEntryDetails((prev) => ({
+        ...prev,
+        attachments: [...prev.attachments, ...files],
+      }));
     } else {
-      setConsultationDetails((prev) => ({ ...prev, [name]: value }));
+      setEntryDetails((prev) => ({ ...prev, [name]: value }));
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleAddMedication = () => {
+    setEntryDetails((prev) => ({
+      ...prev,
+      prescription: [...prev.prescription, { medication: "", dosage: "" }],
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onAddConsultation(consultationDetails);
-    setConsultationDetails({
-      patientName: "",
-      diagnosis: "",
-      advices: "",
-      prescription: "",
-      date: "",
-      time: "",
-      doctorName: "",
-      doctorContact: "",
-      doctorAddress: "",
-      attachment: null,
+
+    // Filter out any empty prescription entries
+    const filledPrescriptions = entryDetails.prescription.filter(
+      (prescription) =>
+        prescription.medication.trim() && prescription.dosage.trim()
+    );
+
+    // Create a FormData object to handle file uploads
+    const formData = new FormData();
+    formData.append("patientName", entryDetails.patientName);
+    formData.append("patientId", entryDetails.patientId);
+    formData.append("date", entryDetails.date);
+    formData.append("symptoms", entryDetails.symptoms);
+    formData.append("diagnosis", entryDetails.diagnosis);
+
+    // Append only filled prescriptions
+    filledPrescriptions.forEach((prescription, index) => {
+      formData.append(
+        `prescription[${index}][medication]`,
+        prescription.medication
+      );
+      formData.append(`prescription[${index}][dosage]`, prescription.dosage);
     });
-    // Normally here you would also have code to send the data to a server
-    alert("Consultation summary added successfully!");
+
+    formData.append(
+      "nonPharmacologicalTreatments",
+      entryDetails.nonPharmacologicalTreatments
+    );
+    formData.append("doctorName", entryDetails.doctorName);
+    formData.append("doctorSpecialization", entryDetails.doctorSpecialization);
+    formData.append("doctorContact", entryDetails.doctorContact);
+    formData.append("followUpInstructions", entryDetails.followUpInstructions);
+    formData.append("hospitalName", entryDetails.hospitalName);
+    entryDetails.attachments.forEach((file) => {
+      formData.append("attachments", file);
+    });
+
+    try {
+      const response = await fetch("/api/medical-entries/add-entry", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert("Medical entry added successfully!");
+        setEntryDetails({
+          patientName: "",
+          patientId: "",
+          date: "",
+          symptoms: "",
+          diagnosis: "",
+          prescription: [{ medication: "", dosage: "" }],
+          nonPharmacologicalTreatments: "",
+          doctorName: "",
+          doctorSpecialization: "",
+          doctorContact: "",
+          followUpInstructions: "",
+          hospitalName: "",
+          attachments: [],
+        });
+
+        // Reset the file input by changing the key
+        setFileInputKey(Date.now());
+      } else {
+        throw new Error(result.message);
+      }
+    } catch (error) {
+      console.error("Error submitting medical entry:", error);
+      alert("Error submitting medical entry. Please try again.");
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} encType="multipart/form-data">
       <label>
         Patient Name:
         <input
           type="text"
           name="patientName"
-          value={consultationDetails.diagnosis}
+          value={entryDetails.patientName}
+          onChange={handleChange}
+          required
+        />
+      </label>
+      <label>
+        Patient ID:
+        <input
+          type="text"
+          name="patientId"
+          value={entryDetails.patientId}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Date of Consultation:
+        <input
+          type="date"
+          name="date"
+          value={entryDetails.date}
+          onChange={handleChange}
+          required
+        />
+      </label>
+      <label>
+        Symptoms:
+        <textarea
+          name="symptoms"
+          value={entryDetails.symptoms}
           onChange={handleChange}
           required
         />
@@ -59,87 +171,106 @@ const ConsultationForm = ({ onAddConsultation }) => {
         <input
           type="text"
           name="diagnosis"
-          value={consultationDetails.diagnosis}
+          value={entryDetails.diagnosis}
           onChange={handleChange}
           required
         />
       </label>
+      {entryDetails.prescription.map((item, index) => (
+        <React.Fragment key={index}>
+          <label>
+            Medication Name:
+            <input
+              type="text"
+              name={`medication-${index}`}
+              value={item.medication}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Dosage:
+            <input
+              type="text"
+              name={`dosage-${index}`}
+              value={item.dosage}
+              onChange={handleChange}
+            />
+          </label>
+        </React.Fragment>
+      ))}
+      <button type="button" onClick={handleAddMedication}>
+        Add Another Medication
+      </button>
       <label>
-        Advices/Practices:
-        <textarea
-          name="advices"
-          value={consultationDetails.advices}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        Prescription:
+        Non-pharmacological Treatments:
         <input
           type="text"
-          name="prescription"
-          value={consultationDetails.prescription}
+          name="nonPharmacologicalTreatments"
+          value={entryDetails.nonPharmacologicalTreatments}
           onChange={handleChange}
-          required
         />
       </label>
       <label>
-        Date:
-        <input
-          type="date"
-          name="date"
-          value={consultationDetails.date}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        Time:
-        <input
-          type="time"
-          name="time"
-          value={consultationDetails.time}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        Doctor Name:
+        Doctor's Name:
         <input
           type="text"
           name="doctorName"
-          value={consultationDetails.doctorName}
+          value={entryDetails.doctorName}
           onChange={handleChange}
           required
         />
       </label>
       <label>
-        Doctor Contact:
+        Doctor's Specialization:
+        <input
+          type="text"
+          name="doctorSpecialization"
+          value={entryDetails.doctorSpecialization}
+          onChange={handleChange}
+          required
+        />
+      </label>
+      <label>
+        Doctor's Contact Information:
         <input
           type="text"
           name="doctorContact"
-          value={consultationDetails.doctorContact}
+          value={entryDetails.doctorContact}
           onChange={handleChange}
           required
         />
       </label>
       <label>
-        Doctor Address:
+        Follow-up Instructions:
+        <textarea
+          name="followUpInstructions"
+          value={entryDetails.followUpInstructions}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Hospital/Clinic Name:
         <input
           type="text"
-          name="doctorAddress"
-          value={consultationDetails.doctorAddress}
+          name="hospitalName"
+          value={entryDetails.hospitalName}
           onChange={handleChange}
           required
         />
       </label>
       <label>
-        Attach Report:
-        <input type="file" name="attachment" onChange={handleChange} />
+        Attach Reports:
+        <input
+          type="file"
+          name="attachments"
+          onChange={handleChange}
+          multiple
+          key={fileInputKey}
+        />
       </label>
-      <button type="submit">Add Consultation Summary</button>
+      <button type="submit">Add Medical Entry</button>
     </form>
   );
 };
 
-export default ConsultationForm;
+export default MedicalEntryForm;

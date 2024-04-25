@@ -24,6 +24,11 @@ mongoose
 const userRoutes = require("./routes/users"); // Make sure the path to your routes is correct
 app.use("/api/users", userRoutes);
 
+const medicalRoutes = require("./routes/medicalEntry"); // Adjust this path to where you store your routes
+app.use("/api/medical-entries", medicalRoutes); // Use your medical routes
+
+app.use("/uploads", express.static("uploads"));
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

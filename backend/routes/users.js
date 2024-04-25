@@ -91,7 +91,7 @@ router.post("/login", async (req, res) => {
     );
 
     // Log the full response object to debug
-    console.log("Response being sent:", { token, role: user.role, userName });
+    // console.log("Response being sent:", { token, role: user.role, userName });
 
     res.json({ token, role: user.role, userName: userName });
   } catch (error) {

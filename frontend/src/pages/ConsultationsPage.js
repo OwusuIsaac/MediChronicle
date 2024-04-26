@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./ConsultationsPage.css";
 import { useUserContext } from "../contexts/UserContext"; // Ensure this is the correct path to your UserContext
 
+const API_BASE_URL = "http://localhost:3001"; // Change this according to your environment setup
+
 const ConsultationsPage = () => {
   const [medicalEntries, setMedicalEntries] = useState([]);
   const { user } = useUserContext(); // Make sure to get the correct user property for identification
@@ -9,6 +11,8 @@ const ConsultationsPage = () => {
   useEffect(() => {
     const fetchMedicalEntries = async () => {
       try {
+        console.log("Fetching medical entries for user:", user?.userName); // Log the username being used for the fetch
+
         // Use the user's name or a unique identifier to fetch their medical entries
         const response = await fetch(
           `/api/medical-entries?patientName=${encodeURIComponent(
@@ -16,9 +20,11 @@ const ConsultationsPage = () => {
           )}`
         );
         if (!response.ok) {
+          console.log("Response not ok", response); // Log the response if not ok
           throw new Error("Network response was not ok");
         }
         const entries = await response.json();
+        console.log("Fetched entries:", entries); // Log fetched entries
         setMedicalEntries(entries);
       } catch (error) {
         console.error("There was a problem fetching medical entries:", error);
@@ -86,20 +92,18 @@ const ConsultationsPage = () => {
 
             <div className="attachments">
               <strong>Attachments: </strong>
-              {entry.attachments.length ? (
-                entry.attachments.map((attachment, index) => (
-                  <a
-                    key={index}
-                    href={`/uploads/${attachment.split("/").pop()}`} // Extract just the filename and append to '/uploads/'
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Document {index + 1}
-                  </a>
-                ))
-              ) : (
-                <p>No attachments available.</p>
-              )}
+              {entry.attachments.length
+                ? entry.attachments.map((attachment, index) => (
+                    <a
+                      key={index}
+                      href={`${API_BASE_URL}/${attachment}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Document {index + 1}
+                    </a>
+                  ))
+                : " None"}
             </div>
           </div>
         ))

@@ -64,7 +64,13 @@ const InsurancePage = () => {
       <div className="insurance-documents">
         <h3>Important Documents:</h3>
         {documents.map((doc, index) => (
-          <a key={index} href={doc.url} className="document-link">
+          <a
+            key={index}
+            href={doc.url}
+            className="document-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {doc.title}
           </a>
         ))}

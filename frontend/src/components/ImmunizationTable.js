@@ -55,8 +55,12 @@ const immunization_data = [
 
 const ImmunizationItem = ({ vaxxItem }) => {
   return (
-    <tr>
-      <td>{vaxxItem.vaccine}</td>
+    <tr
+      className={
+        vaxxItem.type.toLowerCase().includes("booster") ? "booster" : ""
+      }
+    >
+      <td>{vaxxItem.vaccine || "Vaccine Name Pending"}</td>
       <td>{vaxxItem.type}</td>
       <td>{vaxxItem.date1}</td>
       <td>{vaxxItem.administered}</td>
@@ -67,37 +71,22 @@ const ImmunizationItem = ({ vaxxItem }) => {
 
 const ImmunizationTable = () => {
   return (
-    <div id="immunotable-area">
-      {/* <div id="table-title">
-            Immunizations for: {user.name}
-        </div> */}
-      <table id="immunization-table" contentEditable="false">
-        <tr id="table-headers">
-          <th style={{ minWidth: "8vw" }}>Vaccine</th>
-          <th style={{ minWidth: "4vw" }}>Type</th>
-          <th style={{ minWidth: "6vw" }}>
-            Date Given
-            <br></br>
-            (mm/dd/yyyy)
-          </th>
-          <th style={{ minWidth: "5vw" }}>
-            Administered by
-            <br></br>
-            (clinic, doctor, etc.)
-          </th>
-          <th style={{ minWidth: "5vw" }}>
-            Next Dose
-            <br></br>
-            (mm/dd/yyyy)
-          </th>
-        </tr>
-        <ImmunizationItem vaxxItem={immunization_data[0]}></ImmunizationItem>
-        <ImmunizationItem vaxxItem={immunization_data[1]}></ImmunizationItem>
-        <ImmunizationItem vaxxItem={immunization_data[2]}></ImmunizationItem>
-        <ImmunizationItem vaxxItem={immunization_data[3]}></ImmunizationItem>
-        <ImmunizationItem vaxxItem={immunization_data[4]}></ImmunizationItem>
-        <ImmunizationItem vaxxItem={immunization_data[5]}></ImmunizationItem>
-        <ImmunizationItem vaxxItem={immunization_data[6]}></ImmunizationItem>
+    <div className="immunotable-container">
+      <table className="immunization-table">
+        <thead>
+          <tr>
+            <th>Vaccine</th>
+            <th>Type</th>
+            <th>Date Given</th>
+            <th>Administered by</th>
+            <th>Next Dose</th>
+          </tr>
+        </thead>
+        <tbody>
+          {immunization_data.map((item, index) => (
+            <ImmunizationItem key={index} vaxxItem={item} />
+          ))}
+        </tbody>
       </table>
     </div>
   );

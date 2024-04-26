@@ -29,6 +29,8 @@ app.use("/api/medical-entries", medicalRoutes); // Use your medical routes
 
 app.use("/uploads", express.static("uploads"));
 
+app.use("/docs", express.static("docs"));
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

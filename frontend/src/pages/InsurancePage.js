@@ -1,6 +1,8 @@
 import React from "react";
 import "./InsurancePage.css";
 
+const API_BASE_URL = "http://localhost:3001"; // Adjust as necessary
+
 const patientInsurance = {
   plan: {
     name: "Comprehensive Health Coverage",
@@ -29,7 +31,6 @@ const patientInsurance = {
       status: "Processed",
       amount: "$120",
     },
-    // More claims...
   ],
 };
 
@@ -66,7 +67,7 @@ const InsurancePage = () => {
         {documents.map((doc, index) => (
           <a
             key={index}
-            href={doc.url}
+            href={`${API_BASE_URL}${doc.url}`}
             className="document-link"
             target="_blank"
             rel="noopener noreferrer"

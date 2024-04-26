@@ -1,19 +1,44 @@
 .medications-page {
-  padding-top: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  background-color: #ffffff; /* Set to white or another light color */
+  border-radius: 8px; /* Rounded corners for the container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 20px; /* Space inside the container */
+  max-width: 1000px; /* Adjust width as needed */
+  margin: 20px auto; /* Center the container with automatic horizontal margins */
+  overflow: hidden; /* Ensures the content doesn't overflow the rounded corners */
 }
 
-h1 {
-  text-align: center;
-  padding-bottom: 10px;
-}
+/* h1,
 h2 {
-  font-size: 1.4em;
+  color: #333; 
+  margin-bottom: 20px; 
+} */
+
+/* Further style the table headers */
+.med-table th {
+  background-color: #007bff; /* A blue shade for header background */
+  color: white; /* White text color for headers */
+  padding: 10px; /* Spacing inside the header cells */
 }
 
+/* Style for the horizontal rule separating sections */
 hr.solid {
-  margin-top: 10vh;
-  margin-bottom: 8vh;
-  border-top: 3px solid #bbb;
+  border-top: 2px solid #eee; /* Lighter and thinner line */
+  margin-top: 30px; /* Space before the HR */
+  margin-bottom: 30px; /* Space after the HR */
+}
+
+/* Style for the body rows */
+.med-table tr {
+  background-color: #f9f9f9; /* Light background for rows */
+}
+
+.med-table td {
+  padding: 10px; /* Spacing inside cells */
+  border-bottom: 1px solid #eee; /* Lighter borders for cells */
+}
+
+/* Add a hover effect for rows */
+.med-table tr:hover {
+  background-color: #f1f1f1;
 }

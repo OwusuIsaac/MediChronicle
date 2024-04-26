@@ -1,36 +1,111 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./ConsultationsPage.css";
-import Consultation from "../components/Consultation";
-
-const consultationList = [
-  {
-    id: 1,
-    category: "Bloodwork",
-    provider: "Cleveland Clinic",
-    date: "01/01/2024",
-    desc: "Discussed results of recent blood tests - reduced sodium intake advised. (Simple version)",
-  },
-
-  {
-    id: 2,
-    category: "Radiology",
-    provider: "Cleveland Clinic",
-    date: "02/02/2024",
-    desc: `Findings:\n
-    LUNGS: New small anterior pneumotoraces bilaterally. Patient is status post left upper lobe, left lower lobe, right lower lobe, and right upper lobe wedge resections. There is a small posteropative cavity within the right upper lobe that measures 2.4 x 2.4 cm and is surrounded by adjacent consolidation.\n
-    THORACIC NODES: Subcentimeter mediastinal lymph nodes. Surgical clips are present within the left axilla.\n
-    ADRENAL GLANDS: unremarkable.\n
-    Clinical correlation recommended. (Longer version)`,
-  },
-];
+import { useUserContext } from "../contexts/UserContext"; // Ensure this is the correct path to your UserContext
 
 const ConsultationsPage = () => {
+  const [medicalEntries, setMedicalEntries] = useState([]);
+  const { user } = useUserContext(); // Make sure to get the correct user property for identification
+
+  useEffect(() => {
+    const fetchMedicalEntries = async () => {
+      try {
+        // Use the user's name or a unique identifier to fetch their medical entries
+        const response = await fetch(
+          `/api/medical-entries?patientName=${encodeURIComponent(
+            user.userName
+          )}`
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const entries = await response.json();
+        setMedicalEntries(entries);
+      } catch (error) {
+        console.error("There was a problem fetching medical entries:", error);
+      }
+    };
+
+    if (user?.userName) {
+      fetchMedicalEntries();
+    }
+  }, [user]); // Dependency array ensures this effect runs when user state changes
+
   return (
     <div className="consultations-page">
-      <h1>My Consultations</h1>
-      {consultationList.map((consultation) => (
-        <Consultation key={consultation.id} consultation={consultation} />
-      ))}
+      <h1>My Medical History</h1>
+      {medicalEntries.length ? (
+        medicalEntries.map((entry) => (
+          <div key={entry._id} className="medical-entry-card">
+            <h3>Consultation at {entry.hospitalName}</h3>
+            <p>
+              <strong>Date:</strong> {new Date(entry.date).toLocaleDateString()}
+            </p>
+
+            <p>
+              <strong>Symptoms:</strong> {entry.symptoms}
+            </p>
+
+            <p>
+              <strong>Diagnosis:</strong> {entry.diagnosis}
+            </p>
+
+            <div>
+              <strong>Prescriptions:</strong>
+              {entry.prescription.length ? (
+                <ul>
+                  {entry.prescription.map((presc, index) => (
+                    <li key={index}>
+                      {presc.medication} - {presc.dosage}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>N/A</p>
+              )}
+            </div>
+
+            {entry.nonPharmacologicalTreatments && (
+              <p>
+                <strong>Non-Pharmacological Treatments:</strong>{" "}
+                {entry.nonPharmacologicalTreatments}
+              </p>
+            )}
+
+            <p>
+              <strong>Follow-up Instructions:</strong>{" "}
+              {entry.followUpInstructions}
+            </p>
+
+            <p>
+              <strong>Doctor Name:</strong> {entry.doctorName}
+              <br />
+              <strong>Specialization:</strong> {entry.doctorSpecialization}
+              <br />
+              <strong>Contact:</strong> {entry.doctorContact}
+            </p>
+
+            <div className="attachments">
+              <strong>Attachments: </strong>
+              {entry.attachments.length ? (
+                entry.attachments.map((attachment, index) => (
+                  <a
+                    key={index}
+                    href={`/uploads/${attachment.split("/").pop()}`} // Extract just the filename and append to '/uploads/'
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Document {index + 1}
+                  </a>
+                ))
+              ) : (
+                <p>No attachments available.</p>
+              )}
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>No medical history found.</p>
+      )}
     </div>
   );
 };

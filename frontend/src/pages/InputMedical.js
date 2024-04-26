@@ -198,7 +198,11 @@ const MedicalEntryForm = ({ onAddMedicalEntry }) => {
           </label>
         </React.Fragment>
       ))}
-      <button type="button" onClick={handleAddMedication}>
+      <button
+        type="button"
+        onClick={handleAddMedication}
+        style={{ marginBottom: "10px" }}
+      >
         Add Another Medication
       </button>
       <label>

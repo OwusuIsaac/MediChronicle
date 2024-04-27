@@ -70,4 +70,31 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Route to fetch unique doctors for a specific patient
+router.get("/my-doctors/:userName", async (req, res) => {
+  try {
+    const userName = req.params.userName;
+    const entries = await MedicalEntry.find({ patientName: userName });
+    const doctors = entries.map((entry) => ({
+      name: entry.doctorName,
+      specialization: entry.doctorSpecialization,
+      contact: entry.doctorContact,
+      hospital: entry.hospitalName,
+    }));
+
+    // Remove duplicates
+    const uniqueDoctors = Array.from(new Set(doctors.map((a) => a.name))).map(
+      (name) => {
+        return doctors.find((a) => a.name === name);
+      }
+    );
+
+    console.log("Unique doctors for patient:", uniqueDoctors);
+    res.json(uniqueDoctors);
+  } catch (error) {
+    console.error("Error fetching doctors for patient:", error);
+    res.status(500).send({ message: error.message });
+  }
+});
+
 module.exports = router;

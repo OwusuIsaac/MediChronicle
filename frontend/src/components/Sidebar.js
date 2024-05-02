@@ -5,7 +5,7 @@ import { useUserContext } from "../contexts/UserContext"; // Adjust the path as 
 
 const Sidebar = () => {
   const { user } = useUserContext(); // Get the current user's role from context
-  console.log("Sidebar user:", user); // Debug: what does 'user' contain?
+  // console.log("Sidebar user:", user); // Debug: what does 'user' contain?
 
   if (!user) {
     console.log("No user logged in");
@@ -20,42 +20,42 @@ const Sidebar = () => {
           <>
             {/* Patient-specific links */}
             <li className="nav-item">
-              <NavLink to="/home" activeClassName="active" end>
+              <NavLink to="/home" activeclassname="active" end>
                 Home
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/doctors" activeClassName="active">
+              <NavLink to="/doctors" activeclassname="active">
                 Doctors
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/insurance" activeClassName="active">
+              <NavLink to="/insurance" activeclassname="active">
                 Insurance
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/immunizations" activeClassName="active">
+              <NavLink to="/immunizations" activeclassname="active">
                 Immunizations
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/medications" activeClassName="active">
+              <NavLink to="/medications" activeclassname="active">
                 Medications
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/consultations" activeClassName="active">
+              <NavLink to="/consultations" activeclassname="active">
                 Consultations
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/account-settings" activeClassName="active">
+              <NavLink to="/account-settings" activeclassname="active">
                 Account Settings
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/radiology" activeClassName="active">
+              <NavLink to="/radiology" activeclassname="active">
                 Radiology
               </NavLink>
             </li>
@@ -66,13 +66,18 @@ const Sidebar = () => {
           <>
             {/* Doctor-specific links */}
             <li className="nav-item">
-              <NavLink to="/Doctorhomepage" activeClassName="active">
+              <NavLink to="/Doctorhomepage" activeclassname="active">
                 Home
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/InputMedical" activeClassName="active">
+              <NavLink to="/InputMedical" activeclassname="active">
                 Add New Entry
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/chat" activeclassname="active">
+                Chat
               </NavLink>
             </li>
           </>

@@ -9,18 +9,20 @@ export const useUserContext = () => useContext(UserContext);
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null); // Initialize user as null
 
-  const login = (token, role, userName) => {
+  const login = (token, role, userName, id) => {
     // Assuming userName is passed during the login process
     localStorage.setItem("token", token);
     localStorage.setItem("role", role);
     localStorage.setItem("userName", userName); // Store userName in localStorage
-    setUser({ token, role, userName }); // Set user with userName
+    localStorage.setItem("id", id);
+    setUser({ token, role, userName, id }); // Set user with userName
   };
 
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     localStorage.removeItem("userName"); // Remove userName from localStorage
+    localStorage.removeItem("id"); // Remove id from localStorage
     setUser(null);
   };
 

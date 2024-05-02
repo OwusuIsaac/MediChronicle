@@ -35,7 +35,7 @@ const LoginPage = () => {
       const data = await response.json();
 
       if (response.ok) {
-        login(data.token, data.role, data.userName); // Pass userName here
+        login(data.token, data.role, data.userName, data.id); // Pass userName here
         if (data.role === "Doctor") {
           navigate("/Doctorhomepage"); // Redirect doctor to Doctor's Homepage
         } else {

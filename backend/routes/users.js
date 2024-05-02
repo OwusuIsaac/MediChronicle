@@ -93,11 +93,54 @@ router.post("/login", async (req, res) => {
     // Log the full response object to debug
     // console.log("Response being sent:", { token, role: user.role, userName });
 
-    res.json({ token, role: user.role, userName: userName });
+    res.json({ token, role: user.role, userName: userName, id: user.id });
   } catch (error) {
     console.error("Error during login:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 });
 
+// router.get("/:username", async (req, res) => {
+
+// 	try {
+
+// 		// console.log(req.params.username);
+
+//     const loggedInUsername = req.params.username;
+
+// 		const filteredUsers = await User.find({ username: {$ne: loggedInUsername} }).select("-password");
+
+// 		res.json(filteredUsers);
+
+// 	} catch (error) {
+
+// 		console.error("Error in getUsersForSidebar: ", error.message);
+
+// 		res.status(500).json({ error: "Internal server error" });
+
+// 	}
+
+// });
+
+// module.exports = router;
+
+router.get("/:username", async (req, res) => {
+  try {
+    const loggedInUsername = req.params.username;
+
+    // Filter to find users who are doctors and not the logged-in user
+
+    const filteredUsers = await User.find({
+      username: { $ne: loggedInUsername },
+
+      role: "Doctor",
+    }).select("-password"); // Excluding the password field from the result
+
+    res.json(filteredUsers);
+  } catch (error) {
+    console.error("Error in getUsersForSidebar: ", error.message);
+
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 module.exports = router;

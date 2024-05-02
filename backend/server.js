@@ -1,8 +1,15 @@
+// const app = require("./socket/socket.js");
+
+// const server = require("./socket/socket.js");
+
+const { app, server } = require("./socket/socket.js");
+const messageRoutes = require("./routes/message.routes.js");
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-const app = express();
+// const app = express();
 const port = 3001; // Make sure this does not conflict with your React app's port
 
 // Body parsing middleware to parse JSON
@@ -31,10 +38,16 @@ app.use("/uploads", express.static("uploads"));
 
 app.use("/docs", express.static("docs"));
 
+app.use("/api/messages", messageRoutes);
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.listen(port, () => {
+// app.listen(port, () => {
+//   console.log(`Server running on http://localhost:${port}`);
+// });
+
+server.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });

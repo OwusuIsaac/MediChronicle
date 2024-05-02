@@ -20,6 +20,7 @@ import Doctorhomepage from "./pages/Doctorhomepage";
 import InputMedical from "./pages/InputMedical";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
+import Chat from "./pages/chatPage";
 import RoleBasedRedirect from "./components/RoleBasedRedirect";
 
 import "./App.css";
@@ -80,6 +81,7 @@ function App() {
           <Route path="radiology" element={<Radiology />} />
           <Route path="Doctorhomepage" element={<Doctorhomepage />} />
           <Route path="InputMedical" element={<InputMedical />} />
+          <Route path="chat" element={<Chat />} />
         </Route>
       </Routes>
     </>

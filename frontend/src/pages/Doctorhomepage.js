@@ -1,8 +1,8 @@
 import React from "react";
-import { useUserContext } from "../contexts/UserContext"; // Adjust the import path as necessary
-import "./Doctorhomepage.css"; // Make sure the CSS file exists and the path is correct
+import { useUserContext } from "../contexts/UserContext";
+import "./Doctorhomepage.css";
 
-// A card component to display various sections
+// card component to display various sections
 const Card = ({ title, list, emptyMessage }) => (
   <div className="card">
     <h3 className="card-title">{title}</h3>
@@ -20,12 +20,12 @@ const Card = ({ title, list, emptyMessage }) => (
   </div>
 );
 
-// The Doctor's homepage component
+// Doctor's homepage component
 const DoctorHomePage = () => {
-  const { user } = useUserContext(); // Access user context
-  const userName = user ? user.userName : "Guest"; // Handle the case where no user is logged in
+  const { user } = useUserContext();
+  const userName = user ? user.userName : "Guest"; // handle case where no user is logged in
 
-  // Dummy data for the doctor's homepage
+  // dummy data for doctor's homepage
   const myPatients = [
     "John Doe - Diabetes",
     "Jane Smith - Hypertension",
@@ -44,7 +44,7 @@ const DoctorHomePage = () => {
   return (
     <div className="doctor-home-page">
       <header className="welcome-section">
-        <h2>Welcome, Dr.{userName}</h2> {/* Display the user's name */}
+        <h2>Welcome, Dr.{userName}</h2> {/* display user's name */}
       </header>
       <div className="home-content">
         <Card

@@ -2,7 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const { body, validationResult } = require("express-validator");
 
-const MedicalEntry = require("../models/MedicalEntry"); // adjust the path as necessary
+const MedicalEntry = require("../models/MedicalEntry");
 
 const upload = multer({
   storage: multer.diskStorage({
@@ -25,7 +25,7 @@ router.post(
   upload.array("attachments"),
   [
     body("patientName").not().isEmpty().trim().escape(),
-    // Add more validators as needed
+    // add more validators as needed
   ],
   async (req, res) => {
     const errors = validationResult(req);

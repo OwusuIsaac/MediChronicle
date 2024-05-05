@@ -11,11 +11,10 @@
 
 .home-content {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Adjust as needed for layout */
+  grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
 }
 
-/* Style sections similarly */
 .test-results,
 .recent-appointments,
 .current-medications,

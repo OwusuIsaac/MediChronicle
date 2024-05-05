@@ -1,15 +1,14 @@
 import React from "react";
-import { useUserContext } from "../contexts/UserContext"; // Adjust path as necessary
-import "./HomePage.css"; // Create and use HomePage.css for styling
+import { useUserContext } from "../contexts/UserContext";
+import "./HomePage.css";
 
 const HomePage = () => {
-  // Access the user context
   const { user } = useUserContext();
 
-  // Log the user object to see what data is available
+  // Log user object to see what data available
   console.log("User from context:", user);
 
-  // Define mock data directly in the component
+  // Define mock data in the component
   const mockData = {
     testResults: [
       {
@@ -61,7 +60,7 @@ const HomePage = () => {
     ],
   };
 
-  // Use the actual username from the logged-in user's context or default to "Guest"
+  // Use actual username from logged-in user's context or default to "Guest"
   const userName = user ? user.userName : "Guest";
 
   // Destructure the mock data for easier access
@@ -70,7 +69,7 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <section className="welcome-section">
-        <h2>Welcome, {userName}</h2> {/* Dynamically display the user's name */}
+        <h2>Welcome, {userName}</h2> {/* dynamically display user's name */}
       </section>
       <div className="home-content">
         <section className="test-results">

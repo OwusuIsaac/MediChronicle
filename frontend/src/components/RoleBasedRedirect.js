@@ -5,7 +5,7 @@ import { useUserContext } from "../contexts/UserContext";
 const RoleBasedRedirect = () => {
   const { user } = useUserContext();
   const navigate = useNavigate();
-  const location = useLocation(); // This gives us the current route location
+  const location = useLocation(); // gives us current route location
 
   useEffect(() => {
     // Only redirect if the user is not on a role-specific page already
@@ -19,7 +19,7 @@ const RoleBasedRedirect = () => {
     }
   }, [user, navigate, location]);
 
-  return null; // This component does not render anything
+  return null;
 };
 
 export default RoleBasedRedirect;

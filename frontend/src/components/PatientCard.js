@@ -1,5 +1,5 @@
 import React from "react";
-import "./PatientCard.css"; // You should create and style this CSS file similarly to DoctorCard.css
+import "./PatientCard.css";
 
 const PatientCard = ({ patient }) => {
   return (

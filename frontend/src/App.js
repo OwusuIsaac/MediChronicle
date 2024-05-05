@@ -65,7 +65,7 @@ function App() {
 
   return (
     <>
-      <RoleBasedRedirect /> {/* Add this to handle role-based redirection */}
+      <RoleBasedRedirect /> {/* to handle role-based redirection */}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/register" element={<RegisterPage />} />

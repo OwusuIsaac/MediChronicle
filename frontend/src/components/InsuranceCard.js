@@ -1,6 +1,6 @@
 // src/components/InsuranceCard.js
 import React from "react";
-import "./InsuranceCard.css"; // Create a InsuranceCard.css file for styling
+import "./InsuranceCard.css";
 
 const InsuranceCard = ({ insurance }) => {
   return (

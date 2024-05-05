@@ -24,18 +24,18 @@ const userSchema = new Schema({
   patientId: {
     type: String,
     unique: true,
-    sparse: true, // The index will only be enforced on documents with a patientId
+    sparse: true, // the index will only be enforced on documents with a patientId
   },
   doctorId: {
     type: String,
     unique: true,
     sparse: true,
   },
-  // ... other fields
+  // other fields
 });
 
 userSchema.pre("save", function (next) {
-  // Only generate ID if it's a new user
+  // only generate ID if its a new user
   if (this.isNew) {
     if (this.role === "Patient") {
       this.patientId = "P-" + shortid.generate();

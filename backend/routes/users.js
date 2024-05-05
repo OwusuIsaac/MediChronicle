@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const express = require("express");
 const bcrypt = require("bcrypt");
-const User = require("../models/User"); // Adjust this path as necessary
+const User = require("../models/User");
 const { check, validationResult } = require("express-validator");
 const router = express.Router();
 
@@ -65,7 +65,7 @@ router.post(
 router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
-    const user = await User.findOne({ username }).select("+password"); // Ensure password is selected if it's set to select:false in schema
+    const user = await User.findOne({ username }).select("+password");
 
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
@@ -76,12 +76,12 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // Debug log to check the actual userName retrieved from the database
+    // log to check the actual userName retrieved from the database
     console.log("Fetched user name from database:", user.username);
 
     const userName = user.username || "No Name Provided";
 
-    // Debug log to check the userName value before signing the token
+    // log to check the userName value before signing the token
     console.log("Username to be encoded in token:", userName);
 
     const token = jwt.sign(
@@ -90,7 +90,7 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    // Log the full response object to debug
+    // log full response object to debug
     // console.log("Response being sent:", { token, role: user.role, userName });
 
     res.json({ token, role: user.role, userName: userName, id: user.id });
@@ -129,12 +129,11 @@ router.get("/:username", async (req, res) => {
     const loggedInUsername = req.params.username;
 
     // Filter to find users who are doctors and not the logged-in user
-
     const filteredUsers = await User.find({
       username: { $ne: loggedInUsername },
 
       role: "Doctor",
-    }).select("-password"); // Excluding the password field from the result
+    }).select("-password"); // excluding the password field from the result
 
     res.json(filteredUsers);
   } catch (error) {

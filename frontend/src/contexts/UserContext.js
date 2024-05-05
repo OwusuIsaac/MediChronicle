@@ -7,7 +7,7 @@ const UserContext = createContext(null);
 export const useUserContext = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // Initialize user as null
+  const [user, setUser] = useState(null); // initialize user as null
 
   const login = (token, role, userName, id) => {
     // Assuming userName is passed during the login process

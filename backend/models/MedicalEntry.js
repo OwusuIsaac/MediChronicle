@@ -18,7 +18,7 @@ const medicalEntrySchema = new mongoose.Schema({
   doctorContact: { type: String, required: true },
   followUpInstructions: String,
   hospitalName: { type: String, required: true },
-  attachments: [String], // Array of paths to uploaded files
+  attachments: [String],
 });
 
 const MedicalEntry = mongoose.model("MedicalEntry", medicalEntrySchema);

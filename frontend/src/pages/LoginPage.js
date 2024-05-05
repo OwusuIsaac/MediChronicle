@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../contexts/UserContext"; // Adjust the path as necessary
-import "./LoginPage.css"; // Ensure you create and import this CSS file
+import { useUserContext } from "../contexts/UserContext";
+import "./LoginPage.css";
 
 const LoginPage = () => {
   const [loginInfo, setLoginInfo] = useState({
@@ -10,7 +10,7 @@ const LoginPage = () => {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  const { login } = useUserContext(); // Assumed you have this method set up in your context
+  const { login } = useUserContext();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,7 +39,7 @@ const LoginPage = () => {
         if (data.role === "Doctor") {
           navigate("/Doctorhomepage"); // Redirect doctor to Doctor's Homepage
         } else {
-          navigate("/home"); // Redirect other roles to the Home page
+          navigate("/home"); // Redirect other roles to Home page
         }
       } else {
         setErrorMessage(data.message || "Login failed. Please try again.");
@@ -53,7 +53,6 @@ const LoginPage = () => {
     <div className="login-page-wrapper">
       <div className="login-container">
         <h1 className="login-title">MediChronicle</h1>{" "}
-        {/* Title for the login page */}
         <form onSubmit={handleSubmit} className="login-form">
           <label htmlFor="username">Username:</label>
           <input

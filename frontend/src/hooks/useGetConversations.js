@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useUserContext } from "../contexts/UserContext"; // Adjust path as necessary
+import { useUserContext } from "../contexts/UserContext";
 import axios from "axios";
 
 const useGetConversations = () => {

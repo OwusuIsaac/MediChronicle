@@ -61,7 +61,7 @@ const DoctorsPage = () => {
             </div>
           ))
         ) : (
-          <p>No doctors match your search.</p> // Display a message if no doctors are found
+          <p>No doctors match your search.</p> // display a message if no doctors are found
         )}
       </div>
     </div>

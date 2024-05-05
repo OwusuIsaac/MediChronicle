@@ -1,5 +1,5 @@
 import React from "react";
-import { useUserContext } from "../contexts/UserContext"; // Adjust the path as necessary
+import { useUserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import "./Header.css";
 
@@ -8,8 +8,8 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout(); // This will clear the user context and local storage
-    navigate("/login"); // Redirect to login page after logout
+    logout(); // clear the user context and local storage
+    navigate("/login"); // redirect to login page after logout
   };
 
   return (

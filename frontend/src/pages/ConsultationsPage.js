@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from "react";
 import "./ConsultationsPage.css";
-import { useUserContext } from "../contexts/UserContext"; // Ensure this is the correct path to your UserContext
+import { useUserContext } from "../contexts/UserContext";
 
-const API_BASE_URL = "http://localhost:3001"; // Change this according to your environment setup
+const API_BASE_URL = "http://localhost:3001"; // change this according to environment setup
 
 const ConsultationsPage = () => {
   const [medicalEntries, setMedicalEntries] = useState([]);
-  const { user } = useUserContext(); // Make sure to get the correct user property for identification
+  const { user } = useUserContext(); // make sure to get correct user property for identification
 
   useEffect(() => {
     const fetchMedicalEntries = async () => {
       try {
-        console.log("Fetching medical entries for user:", user?.userName); // Log the username being used for the fetch
+        console.log("Fetching medical entries for user:", user?.userName); // log username being used for the fetch
 
-        // Use the user's name or a unique identifier to fetch their medical entries
+        // use user's name or a unique identifier to fetch medical entries
         const response = await fetch(
           `/api/medical-entries?patientName=${encodeURIComponent(
             user.userName
           )}`
         );
         if (!response.ok) {
-          console.log("Response not ok", response); // Log the response if not ok
+          console.log("Response not ok", response); // log response if not ok
           throw new Error("Network response was not ok");
         }
         const entries = await response.json();
-        console.log("Fetched entries:", entries); // Log fetched entries
+        console.log("Fetched entries:", entries); // log fetched entries
         setMedicalEntries(entries);
       } catch (error) {
         console.error("There was a problem fetching medical entries:", error);
@@ -34,7 +34,7 @@ const ConsultationsPage = () => {
     if (user?.userName) {
       fetchMedicalEntries();
     }
-  }, [user]); // Dependency array ensures this effect runs when user state changes
+  }, [user]); // dependency array ensures this effect runs when user state changes
 
   return (
     <div className="consultations-page">

@@ -44,7 +44,6 @@ const Radiology = () => {
       date: "April 20, 2024",
       doctor: "Dr. Garcia",
     },
-    // Add more lab tests as needed
   ];
 
   return (

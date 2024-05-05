@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import "./RegisterPage.css"; // Make sure you have this CSS file created
+import "./RegisterPage.css";
 
 const RegisterPage = () => {
   const [userInfo, setUserInfo] = useState({
     fullName: "",
     username: "",
     password: "",
-    role: "Patient", // Default to 'Patient', assuming most users are patients
+    role: "Patient",
   });
 
   const navigate = useNavigate();
@@ -118,7 +118,7 @@ const RegisterPage = () => {
           >
             <option value="Patient">Patient</option>
             <option value="Doctor">Doctor</option>
-            {/* Add additional roles as needed */}
+            {/* add additional roles as needed */}
           </select>
 
           <button type="submit" className="register-button">

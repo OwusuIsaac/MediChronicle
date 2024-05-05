@@ -4,11 +4,11 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #005a87; /* Assuming this is the brand color you want */
+  background-color: #005a87;
 }
 
 .register-container {
-  background-color: white; /* Content background */
+  background-color: white;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

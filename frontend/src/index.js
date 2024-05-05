@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { UserProvider } from "./contexts/UserContext"; // Adjust the path as necessary
+import { UserProvider } from "./contexts/UserContext"; // adjust path as necessary
 import { SocketContextProvider } from "./contexts/SocketContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

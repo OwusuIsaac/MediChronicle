@@ -51,7 +51,6 @@ h1 {
   background-color: #003f5f;
 }
 
-/* Add responsiveness */
 @media (max-width: 768px) {
   .consultations-page {
     padding: 20px;

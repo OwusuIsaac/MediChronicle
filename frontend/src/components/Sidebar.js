@@ -1,21 +1,21 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "./Sidebar.css"; // Ensure this is linked to the correct CSS file
-import { useUserContext } from "../contexts/UserContext"; // Adjust the path as necessary
+import "./Sidebar.css";
+import { useUserContext } from "../contexts/UserContext";
 
 const Sidebar = () => {
-  const { user } = useUserContext(); // Get the current user's role from context
+  const { user } = useUserContext(); // get current user's role from context
   // console.log("Sidebar user:", user); // Debug: what does 'user' contain?
 
   if (!user) {
     console.log("No user logged in");
-    return null; // Or render some default not logged in sidebar
+    return null;
   }
 
   return (
     <nav className="app-sidebar">
       <ul className="nav-list">
-        {/* Render common links that all users should see */}
+        {/* common links that all users should see */}
         {user && user.role === "Patient" && (
           <>
             {/* Patient-specific links */}

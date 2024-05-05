@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./InputMedical.css"; // Ensure CSS file is correctly linked
+import "./InputMedical.css";
 
 const MedicalEntryForm = ({ onAddMedicalEntry }) => {
   const [entryDetails, setEntryDetails] = useState({
@@ -18,7 +18,7 @@ const MedicalEntryForm = ({ onAddMedicalEntry }) => {
     attachments: [],
   });
 
-  // Add a key state for the file input
+  // Add  key state for the file input
   const [fileInputKey, setFileInputKey] = useState(Date.now());
 
   const handleChange = (e) => {
